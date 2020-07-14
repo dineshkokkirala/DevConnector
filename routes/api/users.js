@@ -11,9 +11,9 @@ const validLoginInput = require("../../validation/login");
 
 const secret = require("../../config/key").secretKey;
 
-router.get("/test", (req, res) => {
-  res.send("Users Works here");
-});
+// router.get("/test", (req, res) => {
+//   res.send("Users Works here");
+// });
 
 router.post("/register", (req, res) => {
   const { errors, isValid } = validRegisterInput(req.body);
