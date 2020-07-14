@@ -5,6 +5,7 @@ const passport = require("passport");
 const User = require("../../models/User");
 const Profile = require("../../models/Profile");
 const validateProfileInput = require("../../validation/profile");
+const profile = require("../../validation/profile");
 
 // router.get("/test", (req, res) => {
 //   res.send("Profile Works here");
@@ -94,5 +95,62 @@ router.post(
     });
   }
 );
+
+// GET api/profile/handle/:handle
+// Get profile by handle
+// Public
+router.get("/handle/:handle", (req, res) => {
+  const errors = {};
+  Profile.findOne({ handle: req.params.handle })
+    .populate("user", ["name", "avatar"])
+    .then((profile) => {
+      if (!profile) {
+        errors.noprofile = "There is no profile for this user";
+        res.status(404).json(errors);
+      }
+      res.json(profile);
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
+// GET api/profile/user/:user
+// Get profile by user
+// Public
+
+router.get("/user/:user_id", (req, res) => {
+  const errors = {};
+
+  Profile.findOne({ user: req.params.user_id })
+    .populate("user", ["name", "avatar"])
+    .then((profile) => {
+      if (!profile) {
+        errors.noprofile = "There is no profile for this user";
+        res.status(404).json(errors);
+      }
+      res.json(profile);
+    })
+    .catch((err) =>
+      res.status(404).json({ profile: "There is no profile for this user" })
+    );
+});
+
+// GET api/profile/all
+// Get all profiles
+// Public
+router.get("/all", (req, res) => {
+  const errors = {};
+  Profile.find()
+    .populate("user", ["name", "avatar"])
+    .then((profiles) => {
+      if (!profiles) {
+        errors.noprofile = "There are no profiles ";
+        return res.status(404).json(errors);
+      }
+      res.json(profiles);
+    })
+    .catch((err) => {
+      res.status(404).json({ profile: "There are no profiles" });
+    });
+});
 
 module.exports = router;
