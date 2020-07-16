@@ -10,7 +10,7 @@ const TextFieldGroup = ({
   error,
   info,
   type,
-  OnChange,
+  onChange,
   disabled,
 }) => {
   return (
