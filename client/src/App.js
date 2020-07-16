@@ -13,7 +13,7 @@ import store from "./store";
 
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser } from "./actions/authActions";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 //check for token
 if (localStorage.jwtToken) {
@@ -23,6 +23,16 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(localStorage.jwtToken);
   //set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
+  //check for exptre token
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    //logout
+    store.dispatch(logoutUser());
+    //clear current profile
+
+    //Redirect to login
+    window.location.href = "/login";
+  }
 }
 
 function App() {
