@@ -5,6 +5,8 @@ import TextFieldGroup from "../common/TextFieldGroup";
 import SelectListGroup from "../common/SelectListGroup";
 import TextAreaGroup from "../common/TextAreaGroup";
 import InputGroup from "../common/InputGroup";
+import { createProfile } from "../../actions/profileActions";
+import { withRouter } from "react-router-dom";
 
 class CreateProfile extends Component {
   constructor(props) {
@@ -29,14 +31,35 @@ class CreateProfile extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
-    console.log("Submit");
+    // console.log("Submit");
+
+    const profileDate = {
+      handle: this.state.handle,
+      company: this.state.company,
+      website: this.state.website,
+      location: this.state.location,
+      status: this.state.status,
+      skills: this.state.skills,
+      githubusername: this.state.githubusername,
+      bio: this.state.bio,
+      twitter: this.state.twitter,
+      facebook: this.state.facebook,
+      linkedin: this.state.linkedin,
+      instagram: this.state.instagram,
+    };
+    this.props.createProfile(profileDate, this.props.history);
   };
-  onChange = (e) => {
+  onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
-  };
+  }
 
   render() {
     const { errors, displaySocialInputs } = this.state;
@@ -121,12 +144,12 @@ class CreateProfile extends Component {
                 />
                 <SelectListGroup
                   placeholder="Status"
-                  name="Status"
+                  name="status"
                   value={this.state.status}
                   onChange={this.onChange}
-                  error={errors.status}
                   options={options}
-                  info="Give us an idea of where you are in your carrier "
+                  error={errors.status}
+                  info="Give us an idea of where you are at in your career"
                 />
                 <TextFieldGroup
                   placeholder="Company"
@@ -178,6 +201,7 @@ class CreateProfile extends Component {
                 />
                 <div className="mb-3">
                   <button
+                    type="button"
                     className="btn btn-light"
                     onClick={() => {
                       this.setState((prevState) => ({
@@ -215,4 +239,6 @@ const mapStateToProps = (state) => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(mapStateToProps, { createProfile })(
+  withRouter(CreateProfile)
+);
