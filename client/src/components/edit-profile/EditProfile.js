@@ -6,7 +6,7 @@ import SelectListGroup from "../common/SelectListGroup";
 import TextAreaGroup from "../common/TextAreaGroup";
 import InputGroup from "../common/InputGroup";
 import { createProfile, getCurrentProfile } from "../../actions/profileActions";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import isEmpty from "../../validation/is-empty";
 
 class EditProfile extends Component {
@@ -181,6 +181,9 @@ class EditProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
+              <Link to="/dashboard" className="btn btn-light">
+                Go Back
+              </Link>
               <h1 className="display-4 text-center">Edit Profile</h1>
 
               <small className="d-block pb-3">* = Required fields</small>
