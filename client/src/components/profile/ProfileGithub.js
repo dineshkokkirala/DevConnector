@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 class ProfileGithub extends Component {
@@ -36,7 +36,12 @@ class ProfileGithub extends Component {
       <div key={repo.id} className="card card-body mb-2">
         <div className="col-md-6">
           <h4>
-            <a href={repo.html_url} className="text-info" target="_blank">
+            <a
+              href={repo.html_url}
+              className="text-info"
+              // eslint-disable-next-line
+              target="_blank"
+            >
               {/* {repo.html_url} */}
               {repo.name}
             </a>
