@@ -3,6 +3,7 @@ import {
   POST_LOADING,
   GET_POSTS,
   DELETE_POST,
+  GET_POST,
 } from "../actions/types";
 
 const initialState = {
@@ -33,6 +34,12 @@ export default function (state = initialState, action) {
       return {
         ...state,
         posts: state.posts.filter((post) => post._id !== action.payload),
+      };
+    case GET_POST:
+      return {
+        ...state,
+        post: action.payload,
+        loading: false,
       };
     default:
       return state;
