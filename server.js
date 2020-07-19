@@ -32,10 +32,9 @@ app.use("/api/users", require("./routes/api/users"));
 app.use("/api/profile", require("./routes/api/profile"));
 app.use("/api/posts", require("./routes/api/posts"));
 
-//server static assets if in production
+// Server static assets if in production
 if (process.env.NODE_ENV === "production") {
-  //set static folder in server.js
-
+  // Set static folder
   app.use(express.static("client/build"));
 
   app.get("*", (req, res) => {

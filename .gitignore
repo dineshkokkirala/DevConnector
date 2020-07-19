@@ -4,4 +4,4 @@ config
 
 ProfileGithub.js
 
-/config/keys_dev.js
+/config/key_dev.js
