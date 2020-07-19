@@ -5,6 +5,7 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
+const Profile = require("../../models/Profile");
 
 const validRegisterInput = require("../../validation/register");
 const validLoginInput = require("../../validation/login");
@@ -77,6 +78,7 @@ router.post("/login", (req, res) => {
           id: user.id,
           name: user.name,
           avatar: user.avatar,
+          // handle: Profile.handle,
         };
         jwt.sign(payload, secret, { expiresIn: 360000 }, (err, token) => {
           if (err) throw err;
