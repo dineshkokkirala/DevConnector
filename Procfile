@@ -1,1 +1,1 @@
-web:node the-link-to-the-file-run-server
+web:node server.js
