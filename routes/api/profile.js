@@ -15,7 +15,7 @@ const profile = require("../../validation/profile");
 
 // GET api/profile
 // Get current user profile
-// Private
+// Private Route
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
@@ -36,7 +36,7 @@ router.get(
 
 // POST api/profile
 // Create or Update current user profile
-// Private
+// Private Route
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
@@ -100,7 +100,7 @@ router.post(
 
 // GET api/profile/handle/:handle
 // Get profile by handle
-// Public
+// Public Route
 router.get("/handle/:handle", (req, res) => {
   const errors = {};
   Profile.findOne({ handle: req.params.handle })
@@ -117,7 +117,7 @@ router.get("/handle/:handle", (req, res) => {
 
 // GET api/profile/user/:user
 // Get profile by user
-// Public
+// Public Route
 
 router.get("/user/:user_id", (req, res) => {
   const errors = {};
@@ -138,7 +138,7 @@ router.get("/user/:user_id", (req, res) => {
 
 // GET api/profile/all
 // Get all profiles
-// Public
+// Public Route
 router.get("/all", (req, res) => {
   const errors = {};
   Profile.find()
@@ -157,7 +157,7 @@ router.get("/all", (req, res) => {
 
 // POST api/profile/experience
 // Add experience to profile
-// Private
+// Private Route
 
 router.post(
   "/experience",
@@ -190,7 +190,7 @@ router.post(
 
 // POST api/profile/education
 // Add education to profile
-// Private
+// Private Route
 
 router.post(
   "/education",
@@ -223,7 +223,7 @@ router.post(
 
 // DELETE api/profile/experience/:exp_id
 // Delete experience from profile
-// Private
+// Private Route
 
 router.delete(
   "/experience/:exp_id",
@@ -247,7 +247,7 @@ router.delete(
 
 // DELETE api/profile/education/:edu_id
 // Delete education from profile
-// Private
+// Private Route
 
 router.delete(
   "/education/:edu_id",
@@ -271,7 +271,7 @@ router.delete(
 
 // DELETE api/profile
 // Delete user and profile
-// Private
+// Private Route
 router.delete(
   "/",
   passport.authenticate("jwt", { session: false }),
